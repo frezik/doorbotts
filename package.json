@@ -1,0 +1,14 @@
+{
+  "name": "doorbot.ts",
+  "version": "0.1.0",
+  "description": "Framework for automatic door opening",
+  "repository": "https://github.com/frezik/doorbot",
+  "license": "BSD-2-Clause",
+  "scripts": {
+      "test": "prove --exec ts-node test/*.ts"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "tap": "^14.6.1"
+  }
+}
