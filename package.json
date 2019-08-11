@@ -5,9 +5,11 @@
   "repository": "https://github.com/frezik/doorbot",
   "license": "BSD-2-Clause",
   "scripts": {
-      "test": "node_modules/.bin/tap --ts test/**/*.ts"
+    "test": "node_modules/.bin/tap --ts test/**/*.ts"
   },
-  "dependencies": {},
+  "dependencies": {
+    "foreground-child": "^1.5.6"
+  },
   "devDependencies": {
     "tap": "^14.6.1"
   }

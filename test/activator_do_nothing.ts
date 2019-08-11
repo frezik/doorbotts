@@ -1,10 +1,10 @@
 import * as tap from 'tap';
-import * as activator from '../src/do_nothing_activator';
+import * as activator from '../src/activator_do_nothing';
 
 
-const act = new activator.DoNothingActivator();
-const act_promise = act.activate();
-
-act_promise.then( ( result ) => {
+const act = new activator.DoNothingActivator( () => {
     tap.pass( "Callback made" );
 });
+const act_promise = act.activate();
+
+act_promise.then( (res) => {} );
