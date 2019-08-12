@@ -1,18 +1,26 @@
 import * as tap from 'tap';
 import * as auth from '../src/authenticator_always';
 import * as activator from '../src/activator_do_nothing';
+import * as multi from '../src/authenticator_multi';
 import * as reader from '../src/read_data';
 
 tap.plan( 1 );
 
 
-const always = new auth.AlwaysAuthenticator();
+const always1 = new auth.AlwaysAuthenticator( false );
+const always2 = new auth.AlwaysAuthenticator();
+const multi_auth = new multi.MultiAuthenticator([
+    always1
+    ,always2,
+]);
+
 const act = new activator.DoNothingActivator( () => {
     tap.pass( "Callback made" );
 });
-always.setActivator( act );
+multi_auth.setActivator( act );
+
 
 const data = new reader.ReadData( "foo" );
-const auth_promise = always.authenticate( data );
+const auth_promise = multi_auth.authenticate( data );
 
 auth_promise.then( (res) => {} );
