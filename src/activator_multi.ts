@@ -9,7 +9,7 @@ export class MultiActivator
     private activators: Array<act.Activator>;
 
     /**
-     * Constructor.
+     * @constructor
      *
      * @param {Array<Activator>} Array of activators to fire off
      */

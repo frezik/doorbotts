@@ -6,7 +6,7 @@ export class DoNothingActivator
     private callback: () => void;
 
     /**
-     * Constructor.
+     * @constructor
      *
      * @param callback: {() => void} The callback to fire off when activated
      */
