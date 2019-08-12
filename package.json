@@ -1,9 +1,11 @@
 {
-  "name": "doorbot.ts",
+  "name": "@frezik/doorbot-ts",
+  "author": "Timm Murray <tmurray@wumpus-cave.net> (http://www.wumpus-cave.net)",
   "version": "0.1.0",
   "description": "Framework for automatic door opening",
   "repository": "https://github.com/frezik/doorbot",
   "license": "BSD-2-Clause",
+  "main": "index.js",
   "scripts": {
     "test": "node_modules/.bin/tap --ts test/**/*.ts"
   },
