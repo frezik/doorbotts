@@ -1,18 +1,16 @@
 import * as tap from 'tap';
-import * as auth from '../src/authenticator_always';
-import * as activator from '../src/activator_do_nothing';
-import * as reader from '../src/read_data';
+import * as doorbot from '../index';
 
 tap.plan( 1 );
 
 
-const always = new auth.AlwaysAuthenticator();
-const act = new activator.DoNothingActivator( () => {
+const always = new doorbot.AlwaysAuthenticator();
+const act = new doorbot.DoNothingActivator( () => {
     tap.pass( "Callback made" );
 });
 always.setActivator( act );
 
-const data = new reader.ReadData( "foo" );
+const data = new doorbot.ReadData( "foo" );
 const auth_promise = always.authenticate( data );
 
 auth_promise.then( (res) => {} );
