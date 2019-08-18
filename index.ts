@@ -11,3 +11,19 @@ export {ReadData} from './src/read_data';
 export {Reader} from './src/reader';
 export {FHReader} from './src/reader_fh';
 export {MockReader} from './src/reader_mock';
+
+
+import * as Logger from 'logger';
+export let log;
+
+export function init_logger( file ): void
+{
+    // Don't do anything if it was already init'd
+    if(! log ) {
+        log = Logger.createLogger( file );
+
+        log.format = ( level, date, message ) => {
+            return '[' + date.toISOString() + '] ' + message;
+        };
+    }
+}

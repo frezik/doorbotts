@@ -1,7 +1,7 @@
 {
   "name": "@frezik/doorbot-ts",
   "author": "Timm Murray <tmurray@wumpus-cave.net> (http://www.wumpus-cave.net)",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "Framework for automatic door opening",
   "repository": "https://github.com/frezik/doorbotts",
   "homepage": "https://github.com/frezik/doorbotts#readme",
@@ -13,7 +13,8 @@
   },
   "dependencies": {
     "foreground-child": "^1.5.6",
-    "fs": "0.0.1-security"
+    "fs": "0.0.1-security",
+    "logger": "0.0.1"
   },
   "devDependencies": {
     "@types/node": "^12.7.1",
