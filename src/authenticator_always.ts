@@ -1,5 +1,6 @@
 import * as activator from './activator';
 import * as read from './read_data';
+import * as Doorbot from '../index';
 
 
 /**
@@ -19,6 +20,7 @@ export class AlwaysAuthenticator
         is_allowed: boolean = true
     ) {
         this.is_allowed = is_allowed;
+        Doorbot.init_logger();
     }
 
 
@@ -29,6 +31,8 @@ export class AlwaysAuthenticator
      */
     setActivator( act: activator.Activator ): void
     {
+        Doorbot.log.info( '<AlwaysAuthenticator> Setting activator: '
+            + act.constructor.name );
         this.act = act;
     }
 
@@ -41,6 +45,8 @@ export class AlwaysAuthenticator
      */
     authenticate( data: read.ReadData ): Promise<any>
     {
+        Doorbot.log.info( '<AlwaysAuthenticator> Allowing through: '
+            + this.is_allowed );
         const promise = this.is_allowed
             ? this.act.activate()
             : new Promise( (resolve, reject) => {

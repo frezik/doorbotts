@@ -1,3 +1,6 @@
+import * as Doorbot from '../index';
+
+
 /**
  * @fileOverview An activator that does nothing (except fire off a callback)
  */
@@ -15,6 +18,7 @@ export class DoNothingActivator
     )
     {
         this.callback = callback;
+        Doorbot.init_logger();
     }
 
 
@@ -25,6 +29,8 @@ export class DoNothingActivator
      */
     activate(): Promise<any>
     {
+        Doorbot.log.info( '<DoNothingActivator> Activated, and doing nothing' );
+
         const promise = new Promise( (resolve, reject) => {
             this.callback();
             resolve( true );

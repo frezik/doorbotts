@@ -4,6 +4,10 @@ import * as ReaderFH from '../src/reader_fh';
 import * as Reader from '../src/reader';
 import * as Auth from '../src/authenticator_always';
 import * as Activator from '../src/activator_do_nothing';
+import * as Doorbot from '../index';
+import * as os from 'os';
+
+Doorbot.init_logger( os.tmpdir() + "/doorbot_test.log"  );
 
 const INPUT_FILE = "test_data/reader.txt";
 

@@ -3,6 +3,10 @@ import * as auth from '../src/authenticator_always';
 import * as activator from '../src/activator_do_nothing';
 import * as multi from '../src/authenticator_multi';
 import * as reader from '../src/read_data';
+import * as Doorbot from '../index';
+import * as os from 'os';
+
+Doorbot.init_logger( os.tmpdir() + "/doorbot_test.log"  );
 
 // The test in the callback should never be called
 tap.plan( 1 );

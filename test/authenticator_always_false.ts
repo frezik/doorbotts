@@ -2,9 +2,14 @@ import * as tap from 'tap';
 import * as auth from '../src/authenticator_always';
 import * as activator from '../src/activator_do_nothing';
 import * as reader from '../src/read_data';
+import * as Doorbot from '../index';
+import * as os from 'os';
+
+Doorbot.init_logger( os.tmpdir() + "/doorbot_test.log"  );
 
 // Authenticator should block the test in the callback
 tap.plan( 1 );
+
 
 const always = new auth.AlwaysAuthenticator( false );
 const act = new activator.DoNothingActivator( () => {

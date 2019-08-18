@@ -1,4 +1,5 @@
 import * as act from './activator';
+import * as Doorbot from '../index';
 
 
 /**
@@ -18,6 +19,7 @@ export class MultiActivator
     )
     {
         this.activators = activators;
+        Doorbot.init_logger();
     }
 
 
@@ -28,6 +30,7 @@ export class MultiActivator
      */
     activate(): Promise<any>
     {
+        Doorbot.log.info( '<MultiActivator> Running multiple activators' );
         const promises = this.activators.map( (act) => {
             return act.activate();
         });

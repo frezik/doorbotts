@@ -1,5 +1,8 @@
 import * as tap from 'tap';
 import * as doorbot from '../index';
+import * as os from 'os';
+
+doorbot.init_logger( os.tmpdir() + "/doorbot_test.log"  );
 
 tap.plan( 1 );
 
