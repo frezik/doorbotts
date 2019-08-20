@@ -62,10 +62,10 @@ export class MultiAuthenticator
                 + ' against data: ' + data.key );
             return auth.authenticate( data );
         });
-        return Promise
-            .all( promises )
-            .then( (values) => {
-                if( values.filter( (_) => _ ).length > 0 ) {
+
+        return this.runPromises( promises )
+            .then( (is_ok) => {
+                if( is_ok ) {
                     Doorbot.log.info( '<MultiAuthenticator> At least one'
                         + ' authenticator passed, allowing' );
                     return this.act.activate();
@@ -79,5 +79,28 @@ export class MultiAuthenticator
                     });
                 }
             });
+    }
+
+
+    // Runs all Promises in array, but unlike Promise.all(), short circuits 
+    // as soon as one resolves with a true result. Unlike Promise.race(), 
+    // won't stop for resolving with a false result.
+    private async runPromises( promises: Array<Promise<any>> ): Promise<any>
+    {
+        let ret = false;
+
+        for( let i = 0; i < promises.length; i++ ) {
+            let next_promise = promises[i];
+            let result = await next_promise;
+
+            if( result ) {
+                ret = true;
+                break;
+            }
+        }
+
+        return new Promise( (resolve, reject) => {
+            resolve( ret );
+        });
     }
 }
