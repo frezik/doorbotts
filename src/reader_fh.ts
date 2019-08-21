@@ -20,22 +20,26 @@ export class FHReader extends reader.Reader
         Doorbot.init_logger();
     }
 
-
-    runOnce(): Promise<any>
+    init(): void
     {
         const rl = readline.createInterface({
             input: this.fh
         });
 
-        const promise = new Promise( (resolve, reject) => {
-            rl.question( '', (line) => {
-                Doorbot.log.info( '<FHReader> Read from filehandle: ' + line );
+        rl.on( 'line', (line) => {
+            Doorbot.log.info( '<FHReader> Read from filehandle: ' + line );
 
-                const data = new read.ReadData( line );
-                const auth_promise = this.auth.authenticate( data );
-                resolve( auth_promise );
-            });
+            const data = new read.ReadData( line );
+            const auth_promise = this.auth.authenticate( data );
+            auth_promise.then( () => {} );
         });
-        return promise;
+    }
+
+    runOnce(): Promise<any>
+    {
+        // Since this is event based, nothing to do here
+        return new Promise( (resolve, reject) => {
+            resolve( true );
+        });
     }
 }

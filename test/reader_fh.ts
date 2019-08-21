@@ -6,6 +6,7 @@ import * as Auth from '../src/authenticator_always';
 import * as Activator from '../src/activator_do_nothing';
 import * as Doorbot from '../index';
 import * as os from 'os';
+import * as process from 'process';
 
 Doorbot.init_logger( os.tmpdir() + "/doorbot_test.log"  );
 
@@ -17,6 +18,7 @@ tap.plan( 2 );
 const always = new Auth.AlwaysAuthenticator();
 const act = new Activator.DoNothingActivator( () => {
     tap.pass( "Callback made" );
+    process.exit( 0 );
 });
 
 const fh = fs.createReadStream( INPUT_FILE );
@@ -27,7 +29,9 @@ tap.ok( fh_reader instanceof Reader.Reader,
 
 fh_reader.setAuthenticator( always );
 always.setActivator( act );
+fh_reader.init();
 
-fh_reader
-    .runOnce()
-    .then( (res) => {} );
+setTimeout( () => {
+    tap.fail( "Callback not made in timely fashion" );
+    process.exit( 1 );
+}, 2000 );
