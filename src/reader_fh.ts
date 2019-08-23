@@ -7,10 +7,16 @@ import * as readline from 'readline';
 import * as Doorbot from '../index';
 
 
+/**
+ * Reads data from a stream.
+ */
 export class FHReader extends reader.Reader
 {
     private fh: stream.Readable;
 
+    /**
+     * @param fh The filehandle to read from. Defaults to `process.stdin`.
+     */
     constructor(
         fh: stream.Readable = process.stdin
     )
@@ -20,6 +26,9 @@ export class FHReader extends reader.Reader
         Doorbot.init_logger();
     }
 
+    /**
+     * Init the read.
+     */
     init(): void
     {
         const rl = readline.createInterface({
@@ -35,6 +44,9 @@ export class FHReader extends reader.Reader
         });
     }
 
+    /**
+     * Does nothing; read handling is done through an event interface.
+     */
     runOnce(): Promise<any>
     {
         // Since this is event based, nothing to do here

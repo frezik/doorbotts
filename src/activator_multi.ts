@@ -3,16 +3,14 @@ import * as Doorbot from '../index';
 
 
 /**
- * @fileOverview Fires off multiple activators at once
+ * Fires off multiple activators at once
  */
 export class MultiActivator
 {
     private activators: Array<act.Activator>;
 
     /**
-     * @constructor
-     *
-     * @param {Array<Activator>} Array of activators to fire off
+     * @param activators Array of activators to fire off
      */
     constructor(
         activators: Array<act.Activator>
@@ -25,8 +23,6 @@ export class MultiActivator
 
     /**
      * Returns a promise that, when resolved, fires off all activators
-     *
-     * @returns {Promise<any>}
      */
     activate(): Promise<any>
     {

@@ -2,16 +2,14 @@ import * as Doorbot from '../index';
 
 
 /**
- * @fileOverview An activator that does nothing (except fire off a callback)
+ * An activator that does nothing (except fire off a callback)
  */
 export class DoNothingActivator
 {
     private callback: () => void;
 
     /**
-     * @constructor
-     *
-     * @param callback: {() => void} The callback to fire off when activated
+     * @param callback The callback to fire off when activated
      */
     constructor(
         callback: () => void

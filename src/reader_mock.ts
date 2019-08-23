@@ -4,11 +4,17 @@ import * as read from './read_data';
 import * as Doorbot from '../index';
 
 
+/**
+ * Mock reader for testing purposes.
+ */
 export class MockReader extends reader.Reader
 {
     private mock_data: read.ReadData;
 
 
+    /**
+     * @param mock_data A string that is read when run
+     */
     constructor( mock_data: string )
     {
         super();
@@ -17,6 +23,10 @@ export class MockReader extends reader.Reader
     }
 
 
+    /**
+     * Returns a promise that, once resolved, reads the data and passes it to 
+     * the authenticator.
+     */
     runOnce(): Promise<any>
     {
         Doorbot.log.info( '<MockReader> Running with ' + this.mock_data );
