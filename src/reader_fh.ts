@@ -31,6 +31,7 @@ export class FHReader extends reader.Reader
      */
     init(): void
     {
+        Doorbot.log.info( '<FHReader> Begin init()' );
         const rl = readline.createInterface({
             input: this.fh
         });
@@ -51,7 +52,9 @@ export class FHReader extends reader.Reader
     {
         // Since this is event based, nothing to do here
         return new Promise( (resolve, reject) => {
-            resolve( true );
+            setTimeout( () => {
+                resolve( true );
+            }, 100 );
         });
     }
 }

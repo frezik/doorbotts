@@ -27,7 +27,8 @@ export class DoNothingActivator
      */
     activate(): Promise<any>
     {
-        Doorbot.log.info( '<DoNothingActivator> Activated, and doing nothing' );
+        Doorbot.log.info(
+            '<DoNothingActivator> Activated, and doing nothing' );
 
         const promise = new Promise( (resolve, reject) => {
             this.callback();
