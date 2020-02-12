@@ -4,6 +4,7 @@ export {MultiActivator} from './src/activator_multi';
 
 export {Authenticator} from './src/authenticator';
 export {AlwaysAuthenticator} from './src/authenticator_always';
+export {JSONAuthenticator} from './src/authenticator_json';
 export {MultiAuthenticator} from './src/authenticator_multi';
 
 export {ReadData} from './src/read_data';
