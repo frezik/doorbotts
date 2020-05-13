@@ -39,9 +39,9 @@ export class JSONAuthenticator
      *
      * @param data Data to use for authentication
      */
-    authenticate( data: read.ReadData ): Promise<any>
+    authenticate( data: read.ReadData ): Promise<boolean>
     {
-        const promise = new Promise( (resolve, reject) => {
+        const promise: Promise<boolean> = new Promise( (resolve, reject) => {
             Fs.readFile( this.database_file, (err, json_data) => {
                 if( err ) {
                     reject( err );
@@ -56,7 +56,7 @@ export class JSONAuthenticator
                         });
                     }
                     else {
-                        resolve( false );
+                        resolve( true );
                     }
                 }
             });

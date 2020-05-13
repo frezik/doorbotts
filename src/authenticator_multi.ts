@@ -52,7 +52,7 @@ export class MultiAuthenticator
      * <strong>Note</strong>: There is no guarntee that authenticators will 
      * be hit in a given order.
      */
-    authenticate( data: read.ReadData ): Promise<any>
+    authenticate( data: read.ReadData ): Promise<boolean>
     {
         Doorbot.log.info( '<MultiAuthenticator> Authenticating multiple ways' );
 

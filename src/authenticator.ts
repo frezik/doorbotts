@@ -20,5 +20,5 @@ export interface Authenticator
      *
      * @param data Data to use for authentication
      */
-    authenticate( data: read.ReadData ): Promise<any>;
+    authenticate( data: read.ReadData ): Promise<boolean>;
 }

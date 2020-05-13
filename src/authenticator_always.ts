@@ -41,12 +41,15 @@ export class AlwaysAuthenticator
      *
      * @param data Data to use for authentication
      */
-    authenticate( data: read.ReadData ): Promise<any>
+    authenticate( data: read.ReadData ): Promise<boolean>
     {
         Doorbot.log.info( '<AlwaysAuthenticator> Allowing through: '
             + this.is_allowed );
-        const promise = this.is_allowed
-            ? this.act.activate()
+        const promise: Promise<boolean> = this.is_allowed
+            ? new Promise( (resolve, reject) => {
+                this.act.activate();
+                resolve( true );
+            })
             : new Promise( (resolve, reject) => {
                 // Do nothing
                 resolve( false );
