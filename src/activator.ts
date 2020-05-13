@@ -6,5 +6,5 @@ export interface Activator
     /**
      * Return a promise that, when resolved, will do the thing
      */
-    activate(): Promise<any>;
+    activate(): Promise<boolean>;
 }

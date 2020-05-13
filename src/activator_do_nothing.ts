@@ -23,17 +23,16 @@ export class DoNothingActivator
     /**
      * Returns a Promise that, when resolved, fires off the callback
      *
-     * @returns {Promise<any>}
+     * @returns {Promise<boolean>}
      */
-    activate(): Promise<any>
+    activate(): Promise<boolean>
     {
         Doorbot.log.info(
             '<DoNothingActivator> Activated, and doing nothing' );
 
-        const promise = new Promise( (resolve, reject) => {
+        return new Promise( (resolve, reject) => {
             this.callback();
             resolve( true );
         });
-        return promise;
     }
 }

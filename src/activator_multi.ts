@@ -24,12 +24,16 @@ export class MultiActivator
     /**
      * Returns a promise that, when resolved, fires off all activators
      */
-    activate(): Promise<any>
+    activate(): Promise<boolean>
     {
         Doorbot.log.info( '<MultiActivator> Running multiple activators' );
         const promises = this.activators.map( (act) => {
             return act.activate();
         });
-        return Promise.all( promises );
+        return new Promise( (resolve, reject) => {
+            Promise
+                .all( promises )
+                .then( () => resolve( true ) );
+        });
     }
 }
