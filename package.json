@@ -17,6 +17,7 @@
     "fs": "0.0.1-security",
     "logger": "0.0.1",
     "typedoc": "^0.15.0",
+    "typescript": "3.9.7",
     "winston": "^3.2.1"
   },
   "devDependencies": {
