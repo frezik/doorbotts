@@ -6,7 +6,7 @@ import * as Doorbot from '../index';
 
 
 /**
- * @fileOverview Authenticator that fires off multiple auth checks and, if any one of them is successful, fires off the Activator
+ * @fileOverview Authenticator that fires off multiple auth checks and, if any one of them is successful, fires off the Activator. Note that all sub Authenticators will run. The Activator will be fired off as soon as the first one passes.
  */
 export class MultiAuthenticator
 {
@@ -63,8 +63,8 @@ export class MultiAuthenticator
             return auth.authenticate( data );
         });
 
-        return this.runPromises( promises )
-            .then( (is_ok) => {
+        return this.runPromises( promises,
+            (is_ok) => {
                 if( is_ok ) {
                     Doorbot.log.info( '<MultiAuthenticator> At least one'
                         + ' authenticator passed, allowing' );
@@ -78,14 +78,23 @@ export class MultiAuthenticator
                         resolve( false );
                     });
                 }
-            });
+            },
+        );
     }
 
 
-    // Runs all Promises in array, but unlike Promise.all(), short circuits 
-    // as soon as one resolves with a true result. Unlike Promise.race(), 
-    // won't stop for resolving with a false result.
-    private async runPromises( promises: Array<Promise<any>> ): Promise<any>
+    // Runs all Promises in array, executing the callback as soon as the first 
+    // one returns true. However, it will still run the rest.
+    //
+    // The callback will still be called with false if none of the promises 
+    // returned a result.
+    //
+    // The promise on the callback will be await'd before continuing with 
+    // the rest.
+    private async runPromises(
+        promises: Array<Promise<any>>,
+        callback: ( result ) => Promise<any>
+    ): Promise<any>
     {
         let ret = false;
 
@@ -93,10 +102,17 @@ export class MultiAuthenticator
             let next_promise = promises[i];
             let result = await next_promise;
 
-            if( result ) {
+            if( result && ! ret ) {
                 ret = true;
-                break;
+                let callback_promise = callback( ret );
+                await callback_promise;
             }
+        }
+
+        // If ret never became true, still execute the callback
+        if(! ret ) {
+            let callback_promise = callback( ret );
+            await callback_promise;
         }
 
         return new Promise( (resolve, reject) => {
